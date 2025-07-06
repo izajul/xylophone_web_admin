@@ -53,6 +53,9 @@ class AuthController extends GetxController {
       );
       print('Logged in successfully: $session');
       await sessionPref.setSessionID(session.$id);
+      final user = await account.get();
+
+      await sessionPref.setUserInfo(user);
       Get.snackbar('Success', 'Logged in successfully');
       Get.offAllNamed('/home');
     } catch (e) {

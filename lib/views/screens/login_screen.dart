@@ -21,39 +21,44 @@ class LoginScreen extends StatelessWidget {
         if (isLoading) {
           return Center(child: CircularProgressIndicator());
         }
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // email input field
-            TextField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Email',
-                hintText: 'Enter your email',
+        return Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 24
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // email input field
+              TextField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Email',
+                  hintText: 'Enter your email',
+                ),
+                controller: auth.emailController,
               ),
-              controller: auth.emailController,
-            ),
-            SizedBox(height: 20),
-            // password input field
-            TextField(
-              obscureText: true,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Password',
-                hintText: 'Enter your password',
+              SizedBox(height: 20),
+              // password input field
+              TextField(
+                obscureText: true,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Password',
+                  hintText: 'Enter your password',
+                ),
+                controller: auth.passwordController,
               ),
-              controller: auth.passwordController,
-            ),
-            SizedBox(height: 20),
+              SizedBox(height: 20),
 
-            // login button
-            FilledButton(
-              onPressed: () {
-                auth.login();
-              },
-              child: Text("Login"),
-            ),
-          ],
+              // login button
+              FilledButton(
+                onPressed: () {
+                  auth.login();
+                },
+                child: Text("Login"),
+              ),
+            ],
+          ),
         );
       }), // This trailing comma makes auto-formatting nicer for build methods.
     );

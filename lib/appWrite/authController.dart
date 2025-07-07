@@ -18,21 +18,36 @@ class AuthController extends GetxController {
 
   Future<void> _checkSession() async {
     isLoading.value = true;
-    await Future.delayed(Duration(seconds: 2));
+    // await Future.delayed(Duration(seconds: 2));
     print("checking session");
-    final sessionId = await sessionPref.getSessionID;
 
-    print("session id: $sessionId");
+    try {
+      // final userInfo = await appWrite.account.get();
+      final cS = await appWrite.account.getSession(sessionId: 'current');
 
-    if (sessionId == null) {
-      Get.offAllNamed('/login');
+      // print("user info: $userInfo");
+      print("current session: ${cS.$id}");
+      await sessionPref.setSessionID(cS.$id);
+      final user = await account.get();
+      await sessionPref.setUserInfo(user);
       isLoading.value = false;
-      return;
+      Get.offAllNamed('/home');
+    } catch (e) {
+      print("no current session");
+      final sessionId = await sessionPref.getSessionID;
+
+      print("session id: $sessionId");
+
+      if (sessionId == null) {
+        Get.offAllNamed('/login');
+        isLoading.value = false;
+        return;
+      }
+      final session = await appWrite.account.getSession(sessionId: sessionId);
+      isLoading.value = false;
+      // if(session.current)
+      Get.offAllNamed('/home');
     }
-    final session = await appWrite.account.getSession(sessionId: sessionId);
-    isLoading.value = false;
-    // if(session.current)
-    Get.offAllNamed('/home');
   }
 
   Account get account => appWrite.account;
@@ -63,6 +78,14 @@ class AuthController extends GetxController {
       Get.snackbar('Error', 'Error logging in: $e');
     }
 
+    isLoading.value = false;
+  }
+
+  Future<void> logout() async {
+    isLoading.value = true;
+    account.deleteSession(sessionId: 'current');
+    await sessionPref.clear();
+    Get.offAllNamed('/login');
     isLoading.value = false;
   }
 }

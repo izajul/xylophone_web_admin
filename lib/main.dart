@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       ),
       // home: MyHomePage(),
       // initialRoute: '/splash',
-      initialRoute: "/addSong",
+      initialRoute: "/home",
       onGenerateRoute: (settings) {
         late final Widget nextScreen;
         switch (settings.name) {

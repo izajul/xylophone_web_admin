@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 import '../localPref/session_pref.dart';
-import 'appwrite_service.dart';
+import '../appWrite/appwrite_service.dart';
 
 class AuthController extends GetxController {
   final appWrite = AppwriteService();

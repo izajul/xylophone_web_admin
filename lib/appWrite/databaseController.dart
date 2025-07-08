@@ -2,7 +2,16 @@
 import 'package:get/get.dart';
 import 'package:xylophone_web/appWrite/appwrite_service.dart';
 
-class DatabaseController extends GetxController{
+class DatabaseRepo{
+
+  static final DatabaseRepo _instance = DatabaseRepo._internal();
+
+  factory DatabaseRepo() => _instance;
+
+  DatabaseRepo._internal() {
+    // _initAppWrite();
+  }
+
   final _db = AppwriteService().databases;
   final _storage = AppwriteService().storage;
 

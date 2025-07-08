@@ -1,7 +1,7 @@
 import 'package:appwrite/models.dart';
 import 'package:get/get.dart';
 
-import 'appwrite_service.dart';
+import '../appWrite/appwrite_service.dart';
 
 class SongListController extends GetxController {
   /// todo: this will be changed to a Song model class, for now it's just a Document list

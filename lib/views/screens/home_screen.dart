@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart' show Get;
 
-import '../../appWrite/authController.dart';
-import '../../appWrite/song_list_controller.dart';
+import '../../controller/authController.dart';
+import '../../controller/song_list_controller.dart';
 import '../../localPref/session_pref.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -22,9 +22,9 @@ class HomeScreen extends StatelessWidget {
         title: FutureBuilder(
           future: sessionPref.getUserInfo,
           builder: (context, c) =>
-              Text("Hi ${c.data?.name}! Welcome to the Xylophone Admin"),
+              Text("Hi ${c.data?.name}!"),
         ),
-        centerTitle: false,
+        centerTitle: true,
         actions: [
           IconButton(
             onPressed: () async {

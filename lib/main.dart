@@ -23,14 +23,14 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
       // home: MyHomePage(),
-      // initialRoute: '/splash',
-      initialRoute: "/home",
+      initialRoute: '/splash',
+      // initialRoute: "/home",
       onGenerateRoute: (settings) {
         late final Widget nextScreen;
         switch (settings.name) {
-          case '/splash':
-            nextScreen = SplashScreen();
-            break;
+          // case '/splash':
+          //   nextScreen = SplashScreen();
+          //   break;
 
           case '/login':
             nextScreen = LoginScreen();
@@ -38,9 +38,14 @@ class MyApp extends StatelessWidget {
 
           case '/home':
             nextScreen = HomeScreen();
+            break;
 
           case '/addSong':
             nextScreen = AddSongScreen();
+            break;
+          default:
+            nextScreen = SplashScreen();
+            break;
         }
         return MaterialPageRoute(builder: (context) => nextScreen);
       },

@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:xylophone_web/controller/authController.dart';
@@ -19,12 +21,13 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
+      scrollBehavior: MyCustomScrollBehavior(),
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
       // home: MyHomePage(),
-      initialRoute: '/splash',
-      // initialRoute: "/home",
+      // initialRoute: '/splash',
+      initialRoute: "/addSong",
       onGenerateRoute: (settings) {
         late final Widget nextScreen;
         switch (settings.name) {
@@ -44,11 +47,20 @@ class MyApp extends StatelessWidget {
             nextScreen = AddSongScreen();
             break;
           default:
-            nextScreen = SplashScreen();
-            break;
+            /*nextScreen = SplashScreen();
+            break;*/
         }
         return MaterialPageRoute(builder: (context) => nextScreen);
       },
     );
   }
+}
+
+class MyCustomScrollBehavior extends MaterialScrollBehavior {
+  // Override behavior methods and getters like dragDevices
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+    PointerDeviceKind.touch,
+    PointerDeviceKind.mouse,
+  };
 }

@@ -44,6 +44,7 @@ class AddSongScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Add New Song"), centerTitle: true),
+      backgroundColor: Colors.blue.shade100,
       body: Center(
         child: ConstrainedBox(
           constraints: BoxConstraints(maxWidth: 860, minWidth: 320),

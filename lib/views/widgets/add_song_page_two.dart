@@ -13,51 +13,303 @@ class AddSongPageTwo extends StatelessWidget {
 
   final addSongController = Get.put(AddSongController());
 
-  final List<BaseNoteModel> notes = [
+  final List<BaseNoteModel> notes1 = [
     SingleNoteModel(
       noteData: NoteDataModel(note: KeyTones.c, offsetX: 0, noteDivider: true),
     ),
+    SingleNoteModel(noteData: NoteDataModel(note: KeyTones.c, offsetX: 0)),
     SingleNoteModel(noteData: NoteDataModel(note: KeyTones.d, offsetX: 0)),
     SingleNoteModel(noteData: NoteDataModel(note: KeyTones.e, offsetX: 0)),
     SingleNoteModel(noteData: NoteDataModel(note: KeyTones.f, offsetX: 0)),
     SingleNoteModel(noteData: NoteDataModel(note: KeyTones.g, offsetX: 0)),
     SingleNoteModel(noteData: NoteDataModel(note: KeyTones.h, offsetX: 0)),
     SingleNoteModel(noteData: NoteDataModel(note: KeyTones.c2, offsetX: 0)),
+    RepeatNoteModel(),
+    SingleNoteModel(
+      noteData: NoteDataModel(
+        note: KeyTones.c,
+        offsetX: 0,
+        noteType: NoteType.eighth,
+        noteDivider: true,
+      ),
+    ),
+
+    SingleNoteModel(
+      noteData: NoteDataModel(
+        note: KeyTones.c,
+        offsetX: 0,
+        noteType: NoteType.eighth,
+      ),
+    ),
+
+    SingleNoteModel(
+      noteData: NoteDataModel(
+        note: KeyTones.d,
+        offsetX: 0,
+        noteType: NoteType.eighth,
+      ),
+    ),
+
+    SingleNoteModel(
+      noteData: NoteDataModel(
+        note: KeyTones.e,
+        offsetX: 0,
+        noteType: NoteType.eighth,
+      ),
+    ),
+
+    SingleNoteModel(
+      noteData: NoteDataModel(
+        note: KeyTones.f,
+        offsetX: 0,
+        noteType: NoteType.eighth,
+      ),
+    ),
+
+    SingleNoteModel(
+      noteData: NoteDataModel(
+        note: KeyTones.g,
+        offsetX: 0,
+        noteType: NoteType.eighth,
+      ),
+    ),
+
+    SingleNoteModel(
+      noteData: NoteDataModel(
+        note: KeyTones.a,
+        offsetX: 0,
+        noteType: NoteType.eighth,
+      ),
+    ),
+
+   /* SingleNoteModel(
+      noteData: NoteDataModel(
+        note: KeyTones.h,
+        offsetX: 0,
+        noteType: NoteType.eighth,
+      ),
+    ),
+
+    SingleNoteModel(
+      noteData: NoteDataModel(
+        note: KeyTones.c2,
+        offsetX: 0,
+        noteType: NoteType.eighth,
+      ),
+    ),*/
+
+    // DivisionNoteModel(),
+  ];
+
+  final List<BaseNoteModel> notes2 = [
+    /// whole notes list
+    SingleNoteModel(
+      noteData: NoteDataModel(
+        note: KeyTones.c,
+        offsetX: 0,
+        noteType: NoteType.whole,
+        noteDivider: true,
+      ),
+    ),
+    SingleNoteModel(
+      noteData: NoteDataModel(
+        note: KeyTones.c,
+        offsetX: 0,
+        noteType: NoteType.whole,
+      ),
+    ),
+    SingleNoteModel(
+      noteData: NoteDataModel(
+        note: KeyTones.d,
+        offsetX: 0,
+        noteType: NoteType.whole,
+      ),
+    ),
+    SingleNoteModel(
+      noteData: NoteDataModel(
+        note: KeyTones.e,
+        offsetX: 0,
+        noteType: NoteType.whole,
+      ),
+    ),
+    SingleNoteModel(
+      noteData: NoteDataModel(
+        note: KeyTones.f,
+        offsetX: 0,
+        noteType: NoteType.whole,
+      ),
+    ),
+    SingleNoteModel(
+      noteData: NoteDataModel(
+        note: KeyTones.g,
+        offsetX: 0,
+        noteType: NoteType.whole,
+      ),
+    ),
+    SingleNoteModel(
+      noteData: NoteDataModel(
+        note: KeyTones.h,
+        offsetX: 0,
+        noteType: NoteType.whole,
+      ),
+    ),
+    SingleNoteModel(
+      noteData: NoteDataModel(
+        note: KeyTones.c2,
+        offsetX: 0,
+        noteType: NoteType.whole,
+      ),
+    ),
+
+    RepeatNoteModel(
+      showRightHand: true,
+    ),
+
+    /// half notes list
+    SingleNoteModel(
+      noteData: NoteDataModel(
+        note: KeyTones.d,
+        offsetX: 0,
+        noteType: NoteType.half,
+      ),
+    ),
+    SingleNoteModel(
+      noteData: NoteDataModel(
+        note: KeyTones.e,
+        offsetX: 0,
+        noteType: NoteType.half,
+      ),
+    ),
+    SingleNoteModel(
+      noteData: NoteDataModel(
+        note: KeyTones.f,
+        offsetX: 0,
+        noteType: NoteType.half,
+      ),
+    ),
+    SingleNoteModel(
+      noteData: NoteDataModel(
+        note: KeyTones.g,
+        offsetX: 0,
+        noteType: NoteType.half,
+      ),
+    ),
+    SingleNoteModel(
+      noteData: NoteDataModel(
+        note: KeyTones.a,
+        offsetX: 0,
+        noteType: NoteType.half,
+      ),
+    ),
+    SingleNoteModel(
+      noteData: NoteDataModel(
+        note: KeyTones.h,
+        offsetX: 0,
+        noteType: NoteType.half,
+      ),
+    ),
+    SingleNoteModel(
+      noteData: NoteDataModel(
+        note: KeyTones.c2,
+        offsetX: 0,
+        noteType: NoteType.half,
+      ),
+    ),
+  ];
+
+  final List<BaseNoteModel> notes3 = [
+    BeamNoteModel(
+      notes: [
+        NoteDataModel(note: KeyTones.c, offsetX: 0, noteType: NoteType.eighth),
+        NoteDataModel(note: KeyTones.g, offsetX: 0, noteType: NoteType.eighth),
+      ],
+    ),
+    SilentNoteModel(),
+    BeamNoteModel(
+      hasDoubleBeam: true,
+      notes: [
+        NoteDataModel(
+          note: KeyTones.c,
+          offsetX: 0,
+          noteType: NoteType.sixteenth,
+        ),
+        NoteDataModel(
+          note: KeyTones.g,
+          offsetX: 0,
+          noteType: NoteType.sixteenth,
+        ),
+      ],
+    ),
   ];
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
 
         children: [
           Text(
-            "Drag The Notes Below",
+            "Drag The Notes Below *",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           SizedBox(height: 12),
 
-          Wrap(
-            children: [
-              for (var note in notes)
-                Draggable<BaseNoteModel>(
-                  data: note,
-                  feedback: SizedBox(
-                    width: 56,
-                    height: 56,
+          /// Available Notes
+          SizedBox(
+            height: 90,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: [
+                for (var note in notes1)
+                  Draggable<BaseNoteModel>(
+                    data: note,
+                    feedback: NoteWidget(note: note),
                     child: NoteWidget(note: note),
+                    onDragCompleted: () {
+                      print("Completed");
+                    },
                   ),
-                  child: SizedBox(
-                    width: 56,
-                    height: 56,
+              ],
+            ),
+          ),
+
+          /// Available Notes
+          SizedBox(
+            height: 90,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: [
+                for (var note in notes2)
+                  Draggable<BaseNoteModel>(
+                    data: note,
+                    feedback: NoteWidget(note: note),
                     child: NoteWidget(note: note),
+                    onDragCompleted: () {
+                      print("Completed");
+                    },
                   ),
-                  onDragCompleted: () {
-                    print("Completed");
-                  },
-                ),
-            ],
+              ],
+            ),
+          ),
+
+          /// Available Notes
+          SizedBox(
+            height: 90,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: [
+                for (var note in notes3)
+                  Draggable<BaseNoteModel>(
+                    data: note,
+                    feedback: NoteWidget(note: note),
+                    child: NoteWidget(note: note),
+                    onDragCompleted: () {
+                      print("Completed");
+                    },
+                  ),
+              ],
+            ),
           ),
 
           SizedBox(height: 24),
@@ -67,8 +319,9 @@ class AddSongPageTwo extends StatelessWidget {
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           SizedBox(height: 12),
-          StaffWithNotesDragNDrop(),
 
+          /// Staff with notes
+          StaffWithNotesDragNDrop(),
 
           SizedBox(height: 16),
 
@@ -78,11 +331,15 @@ class AddSongPageTwo extends StatelessWidget {
           ),
           Text(
             "Must each lyrics Separated by Comma \",\"",
-            style: TextStyle(fontWeight: FontWeight.normal, fontSize: 12, fontStyle: FontStyle.italic),
+            style: TextStyle(
+              fontWeight: FontWeight.normal,
+              fontSize: 12,
+              fontStyle: FontStyle.italic,
+            ),
           ),
           SizedBox(height: 12),
 
-          /// song name input form field
+          /// Lyrics input form field
           TextFormField(
             keyboardType: TextInputType.number,
             decoration: InputDecoration(
@@ -98,15 +355,20 @@ class AddSongPageTwo extends StatelessWidget {
               return null;
             },
             onChanged: (value) {
-              addSongController.lyrics.value = value.split(",").map((e) => e.trim()).toList();
+              addSongController.lyrics.value = value
+                  .split(",")
+                  .map((e) => e.trim())
+                  .toList();
             },
           ),
-       /*   DragTarget<BaseNoteModel>(
+          /*   DragTarget<BaseNoteModel>(
             onAcceptWithDetails: (details) {
               print("onAcceptWithDetails: ${details.data}");
-              *//* setState(() {
+              */
+          /* setState(() {
                 widget.notes.add(details.data);
-              });*//*
+              });*/
+          /*
             },
             onWillAcceptWithDetails: (details) {
               print("onWillAcceptWithDetails: ${details.data}");

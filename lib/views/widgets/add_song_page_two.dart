@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:xylophone_web/views/widgets/staff_with_notes.dart';
 
+import '../../controller/add_song_controller.dart';
 import '../../models/note_model.dart';
 import '../../utils/assets.dart';
 import 'note_widget.dart';
 
 class AddSongPageTwo extends StatelessWidget {
   AddSongPageTwo({super.key});
+
+  final addSongController = Get.put(AddSongController());
 
   final List<BaseNoteModel> notes = [
     SingleNoteModel(
@@ -62,7 +67,40 @@ class AddSongPageTwo extends StatelessWidget {
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           SizedBox(height: 12),
-          StaffWithNotesDragNDrop(notes: []),
+          StaffWithNotesDragNDrop(),
+
+
+          SizedBox(height: 16),
+
+          Text(
+            "Enter Song Lyrics. *",
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+          ),
+          Text(
+            "Must each lyrics Separated by Comma \",\"",
+            style: TextStyle(fontWeight: FontWeight.normal, fontSize: 12, fontStyle: FontStyle.italic),
+          ),
+          SizedBox(height: 12),
+
+          /// song name input form field
+          TextFormField(
+            keyboardType: TextInputType.number,
+            decoration: InputDecoration(
+              border: OutlineInputBorder(),
+              hintText: "Po,ka,pa,la,na,la,si,...",
+            ),
+
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter a value';
+              }
+
+              return null;
+            },
+            onChanged: (value) {
+              addSongController.lyrics.value = value.split(",").map((e) => e.trim()).toList();
+            },
+          ),
        /*   DragTarget<BaseNoteModel>(
             onAcceptWithDetails: (details) {
               print("onAcceptWithDetails: ${details.data}");

@@ -11,6 +11,8 @@ class AddSongController extends GetxController {
   final isPageTwoFilled = true.obs;
   final isPageThreeFilled = true.obs;
 
+  final lyrics = <String>[].obs;
+
   Future<void> addSong() async {
     isLoading.value = true;
     await _db.createDocument();

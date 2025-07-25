@@ -4,14 +4,12 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../controller/add_song_controller.dart';
 import '../../models/note_model.dart';
 import 'note_widget.dart';
 
 class StaffWithNotesDragNDrop extends StatefulWidget {
-  const StaffWithNotesDragNDrop({super.key, required this.notes});
-
-  final List<BaseNoteModel> notes;
-  // final List<String> lyrics
+  const StaffWithNotesDragNDrop({super.key});
 
   @override
   State<StaffWithNotesDragNDrop> createState() =>
@@ -26,13 +24,13 @@ class _StaffWithNotesDragNDropState extends State<StaffWithNotesDragNDrop> {
 
   bool _isSyncing = false;
 
+  final addSongController = Get.put(AddSongController());
 
   @override
   void initState() {
     super.initState();
+    // notes.addAll(widget.notes);
     _noteController.addListener(() {
-
-
       if (_isSyncing) return;
       _isSyncing = true;
       _lyricsController.jumpTo(_noteController.offset);
@@ -46,7 +44,6 @@ class _StaffWithNotesDragNDropState extends State<StaffWithNotesDragNDrop> {
       _isSyncing = false;
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -114,7 +111,6 @@ class _StaffWithNotesDragNDropState extends State<StaffWithNotesDragNDrop> {
                     });
                     // _scrollController.jumpTo(_scrollController.offset);
                     WidgetsBinding.instance.addPostFrameCallback((_) {
-
                       _noteController.animateTo(
                         _noteController.position.maxScrollExtent,
                         duration: 100.milliseconds,
@@ -183,23 +179,32 @@ class _StaffWithNotesDragNDropState extends State<StaffWithNotesDragNDrop> {
           height: 20,
           child: Padding(
             padding: const EdgeInsets.only(left: 50),
-            child: ListView.builder(
-              physics: const ClampingScrollPhysics(),
-              controller: _lyricsController,
-              scrollDirection: Axis.horizontal,
-              itemCount: 0,
-              // itemCount: notes.length,
-              itemBuilder: (context, idx) {
-                final item = notes[idx];
-                return Padding(
-                  padding: const EdgeInsets.only(right: 10, left: 10),
-                  child: SizedBox(
-                    width: 30,
-                    child: Center(child: Text("L-1")),
-                  ),
-                );
-              },
-            ),
+            child: Obx(() {
+              final lyrics = addSongController.lyrics.value;
+
+              return ListView.builder(
+                physics: const ClampingScrollPhysics(),
+                controller: _lyricsController,
+                scrollDirection: Axis.horizontal,
+                // itemCount: 0,
+                itemCount: notes.length,
+                itemBuilder: (context, idx) {
+                  // final item = notes[idx];
+                  var text = "";
+                  if (idx < lyrics.length) {
+                    text = lyrics[idx];
+                  }
+
+                  return Padding(
+                    padding: const EdgeInsets.only(right: 2, left: 2),
+                    child: SizedBox(
+                      width: 46,
+                      child: Center(child: Text("$text")),
+                    ),
+                  );
+                },
+              );
+            }),
           ),
         ),
       ],

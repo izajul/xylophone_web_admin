@@ -361,34 +361,6 @@ class AddSongPageTwo extends StatelessWidget {
                   .toList();
             },
           ),
-          /*   DragTarget<BaseNoteModel>(
-            onAcceptWithDetails: (details) {
-              print("onAcceptWithDetails: ${details.data}");
-              */
-          /* setState(() {
-                widget.notes.add(details.data);
-              });*/
-          /*
-            },
-            onWillAcceptWithDetails: (details) {
-              print("onWillAcceptWithDetails: ${details.data}");
-              return true;
-            },
-            builder:
-                (
-                  BuildContext context,
-                  List<BaseNoteModel?> candidateData,
-                  List<dynamic> rejectedData,
-                ) {
-                  print("builder");
-
-                  return Container(
-                    width: double.infinity,
-                    height: 56,
-                    color: Colors.blue,
-                  );
-                },
-          ),*/
         ],
       ),
     );

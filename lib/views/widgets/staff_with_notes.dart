@@ -162,11 +162,38 @@ class _StaffWithNotesDragNDropState extends State<StaffWithNotesDragNDrop> {
                               },
                           children: [
                             for (var i = 0; i < notes.length; i++)
-                              ReorderableDragStartListener(
+                        ReorderableDragStartListener(
+                          key: Key("$i"),
+                          index: i,
+                          child: Material(
+                            color: Colors.transparent,
+                            child: PopupMenuButton(
+                              child: NoteWidget(note: notes[i]),
+                              itemBuilder: (context) {
+                              return [
+                                PopupMenuItem(
+                                  child: Text("Delete"),
+                                  onTap: () {
+                                    setState(() {
+                                      notes.removeAt(i);
+                                    });
+                                  },
+                                ),
+                              ];
+                            },
+                            ),
+                          )
+
+                        ),
+                             /* ReorderableDragStartListener(
                                 key: Key("$i"),
                                 index: i,
-                                child: NoteWidget(note: notes[i]),
-                              ),
+                                child: GestureDetector(
+                                  onLongPress: (){
+                                    print("long press");
+                                  },
+                                    child: NoteWidget(note: notes[i])),
+                              ),*/
                           ],
                         );
                       },

@@ -221,28 +221,61 @@ class _StaffWithNotesDragNDropState extends State<StaffWithNotesDragNDrop> {
             padding: const EdgeInsets.only(left: 50),
             child: Obx(() {
               final lyrics = addSongController.lyrics.value;
-
-              return ListView.builder(
+              var lyricsIdx = 0;
+              return ListView(
                 physics: const ClampingScrollPhysics(),
                 controller: _lyricsController,
                 scrollDirection: Axis.horizontal,
                 // itemCount: 0,
-                itemCount: notes.length,
-                itemBuilder: (context, idx) {
-                  // final item = notes[idx];
-                  var text = "";
-                  if (idx < lyrics.length) {
-                    text = lyrics[idx];
-                  }
+                // itemCount: notes.length,
+                children: [
+                  ...List.generate(notes.length, (idx) {
+                    if (lyricsIdx > lyrics.length-1) {
+                      // text = ;
+                      return SizedBox.shrink();
+                    }
 
-                  return Padding(
-                    padding: const EdgeInsets.only(right: 2, left: 2),
-                    child: SizedBox(
-                      width: 46,
-                      child: Center(child: Text("$text")),
-                    ),
-                  );
-                },
+                    final item = notes[idx];
+
+                    if (item is BeamNoteModel) {
+                      return Row(
+                        children: [
+                          ...List.generate(item.notes.length, (idx) {
+                            if (lyricsIdx > lyrics.length - 1) {
+                              // text = ;
+                              return SizedBox.shrink();
+                            }
+
+                            final text = lyrics[lyricsIdx];
+                            lyricsIdx++;
+
+                            return Padding(
+                              padding: const EdgeInsets.only(right: 2, left: 2),
+                              child: SizedBox(
+                                width: 46,
+                                child: Center(child: Text("$text")),
+                              ),
+                            );
+                          }),
+                        ],
+                      );
+                    }
+
+                    if (item is SingleNoteModel) {
+                      var text = lyrics[lyricsIdx];
+
+                      lyricsIdx++;
+                      return Padding(
+                        padding: const EdgeInsets.only(right: 2, left: 2),
+                        child: SizedBox(
+                          width: 46,
+                          child: Center(child: Text("$text")),
+                        ),
+                      );
+                    }
+                    return SizedBox.shrink();
+                  }),
+                ],
               );
             }),
           ),

@@ -6,7 +6,9 @@ import '../../../utils/assets.dart';
 
 class BeamNoteModifierDialog extends StatelessWidget {
   BeamNoteModifierDialog({super.key, required this.note}) {
-    notes.addAll(note.notes.map((e)=>e.copy));
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      notes.addAll(note.notes.map((e)=>e.copy));
+    });
   }
 
   final BeamNoteModel note;

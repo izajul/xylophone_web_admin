@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:xylophone_web/views/widgets/dialogs/beam_note_modifier_dialog.dart';
 
 import '../../controller/add_song_controller.dart';
 import '../../models/note_model.dart';
@@ -104,11 +105,24 @@ class _StaffWithNotesDragNDropState extends State<StaffWithNotesDragNDrop> {
                 left: 50,
                 right: 0,
                 child: DragTarget<BaseNoteModel>(
-                  onAcceptWithDetails: (details) {
+                  onAcceptWithDetails: (details) async {
                     print(details.data);
-                    setState(() {
-                      notes.add(details.data);
-                    });
+
+                    final data = details.data;
+
+                    if (data is BeamNoteModel) {
+                      final nNote = await BeamNoteModifierDialog.show(
+                        context,
+                        data,
+                      );
+                      setState(() {
+                        notes.add(nNote);
+                      });
+                    } else {
+                      setState(() {
+                        notes.add(data);
+                      });
+                    }
                     // _scrollController.jumpTo(_scrollController.offset);
                     WidgetsBinding.instance.addPostFrameCallback((_) {
                       _noteController.animateTo(
@@ -162,30 +176,29 @@ class _StaffWithNotesDragNDropState extends State<StaffWithNotesDragNDrop> {
                               },
                           children: [
                             for (var i = 0; i < notes.length; i++)
-                        ReorderableDragStartListener(
-                          key: Key("$i"),
-                          index: i,
-                          child: Material(
-                            color: Colors.transparent,
-                            child: PopupMenuButton(
-                              child: NoteWidget(note: notes[i]),
-                              itemBuilder: (context) {
-                              return [
-                                PopupMenuItem(
-                                  child: Text("Delete"),
-                                  onTap: () {
-                                    setState(() {
-                                      notes.removeAt(i);
-                                    });
-                                  },
+                              ReorderableDragStartListener(
+                                key: Key("$i"),
+                                index: i,
+                                child: Material(
+                                  color: Colors.transparent,
+                                  child: PopupMenuButton(
+                                    child: NoteWidget(note: notes[i]),
+                                    itemBuilder: (context) {
+                                      return [
+                                        PopupMenuItem(
+                                          child: Text("Delete"),
+                                          onTap: () {
+                                            setState(() {
+                                              notes.removeAt(i);
+                                            });
+                                          },
+                                        ),
+                                      ];
+                                    },
+                                  ),
                                 ),
-                              ];
-                            },
-                            ),
-                          )
-
-                        ),
-                             /* ReorderableDragStartListener(
+                              ),
+                            /* ReorderableDragStartListener(
                                 key: Key("$i"),
                                 index: i,
                                 child: GestureDetector(

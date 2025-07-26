@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../utils/assets.dart';
 import '../utils/helper_func.dart';
 
-
 sealed class BaseNoteModel {}
 
 /// single note
@@ -80,7 +79,7 @@ class RepeatNoteModel extends BaseNoteModel {
 class DivisionNoteModel extends BaseNoteModel {}
 
 class NoteDataModel {
-  final KeyTones? note; // e.g., 'C', 'D', 'E'
+  KeyTones? note; // e.g., 'C', 'D', 'E'
   // final int position; // vertical position index (0 = bottom line)
   final double offsetX; // horizontal scroll position
 
@@ -171,4 +170,12 @@ class NoteDataModel {
     this.noteDivider = false,
     this.dotNumber = 0,
   });
+
+  NoteDataModel get copy => NoteDataModel(
+    note: note,
+    offsetX: offsetX,
+    noteType: noteType,
+    noteDivider: noteDivider,
+    dotNumber: dotNumber,
+  );
 }

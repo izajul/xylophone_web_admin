@@ -215,6 +215,8 @@ class _StaffWithNotesDragNDropState extends State<StaffWithNotesDragNDrop> {
             ],
           ),
         ),
+
+        /// song lyrics
         SizedBox(
           height: 20,
           child: Padding(
@@ -230,10 +232,11 @@ class _StaffWithNotesDragNDropState extends State<StaffWithNotesDragNDrop> {
                 // itemCount: notes.length,
                 children: [
                   ...List.generate(notes.length, (idx) {
-                    if (lyricsIdx > lyrics.length-1) {
-                      // text = ;
-                      return SizedBox.shrink();
-                    }
+                    print("notes size ${notes.length}, idx $idx, lyricsIdx $lyricsIdx");
+                    // if (lyricsIdx > lyrics.length - 1) {
+                    //   // text = ;
+                    //   return SizedBox(width: 46, child: Text("-"),);
+                    // }
 
                     final item = notes[idx];
 
@@ -243,7 +246,7 @@ class _StaffWithNotesDragNDropState extends State<StaffWithNotesDragNDrop> {
                           ...List.generate(item.notes.length, (idx) {
                             if (lyricsIdx > lyrics.length - 1) {
                               // text = ;
-                              return SizedBox.shrink();
+                              return SizedBox(width: 46, child: Text("--"),);
                             }
 
                             final text = lyrics[lyricsIdx];
@@ -261,7 +264,7 @@ class _StaffWithNotesDragNDropState extends State<StaffWithNotesDragNDrop> {
                       );
                     }
 
-                    if (item is SingleNoteModel) {
+                    if (item is SingleNoteModel && lyricsIdx <lyrics.length) {
                       var text = lyrics[lyricsIdx];
 
                       lyricsIdx++;
@@ -273,7 +276,7 @@ class _StaffWithNotesDragNDropState extends State<StaffWithNotesDragNDrop> {
                         ),
                       );
                     }
-                    return SizedBox.shrink();
+                    return SizedBox(width: 46, child: Text("---"),);
                   }),
                 ],
               );
